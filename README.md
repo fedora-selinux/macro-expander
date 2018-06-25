@@ -5,13 +5,13 @@ Geneterated output is in CIL representation.
 
 ## Usage
 
-    ./sepolicy-expanser "NAME_OF_MACRO(SELINUX_DOMAIN)"
+    ./sepolicy-expanser.sh "NAME_OF_MACRO(SELINUX_DOMAIN)"
 
 ## Example
 
-    git clone git@github.com:wrabcak/sepolicy-expanser.git
-    cd sepolicy-expanser
-    ./sepolicy-expanser "apache_read_log(mysqld_t)"
+    $ git clone git@github.com:wrabcak/sepolicy-expanser.git
+    $ cd sepolicy-expanser
+    $ ./sepolicy-expanser.sh "apache_read_log(mysqld_t)"
     (allow mysqld_t httpd_log_t (dir (getattr search open)))
     (allow mysqld_t httpd_log_t (dir (ioctl read getattr lock search open)))
     (allow mysqld_t httpd_log_t (file (ioctl read getattr lock open)))
