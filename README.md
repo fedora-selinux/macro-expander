@@ -1,7 +1,7 @@
 # sepolicy-expander
 
-Tool helps determinate what raw allow rules will be enabled using specific selinux policy m4 macro.
-Geneterated output is in CIL representation or in policy source (.te) format.
+Tool helps determine what raw allow rules will be enabled using specific selinux policy m4 macro.
+Generated output is in CIL representation or in policy source (.te) format.
 
 ## Usage
 
