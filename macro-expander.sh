@@ -3,8 +3,8 @@
 function usage {
     echo "Usage: $0 [ -c | -t [ -M ] ] <macro>"
     echo "Options:
-  -t     generate standard policy source format (.te) allow rules - this is default
   -c     generate CIL output
+  -t     generate standard policy source format (.te) allow rules - this is default
   -M     generate complete module .te output
 "
 }
