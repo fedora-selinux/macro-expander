@@ -3,8 +3,8 @@
 function usage {
     echo "Usage: $0 [ -c | -t [ -M ] ] <macro>"
     echo "Options:
-  -c     generate CIL output - this is default
-  -t     generate standard policy source format (.te) allow rules
+  -t     generate standard policy source format (.te) allow rules - this is default
+  -c     generate CIL output
   -M     generate complete module .te output
 "
 }
@@ -55,7 +55,7 @@ echo "$SELINUX_MACRO" >> expander.te
 
 make -f /usr/share/selinux/devel/Makefile tmp/all_interfaces.conf &> /dev/null
 
-if [ "$GENCIL" = "1" -o "x$GENTE" != "x1" ]; then
+if [ "x$GENCIL" = "x1" ]; then
 
     make -f /usr/share/selinux/devel/Makefile expander.pp &> /dev/null
     MAKE_RESULT=$?
@@ -67,7 +67,7 @@ if [ "$GENCIL" = "1" -o "x$GENTE" != "x1" ]; then
     fi
 fi
 
-if [ "x$GENTE" = "x1" ]; then
+if [ "$GENTE" = "1" -o "x$GENCIL" != "x1" ]; then
     m4 -D enable_mcs -D distro_redhat -D hide_broken_symptoms -D mls_num_sens=16 -D mls_num_cats=1024 -D mcs_num_cats=1024 -s /usr/share/selinux/devel/include/support/file_patterns.spt /usr/share/selinux/devel/include/support/ipc_patterns.spt /usr/share/selinux/devel/include/support/obj_perm_sets.spt /usr/share/selinux/devel/include/support/misc_patterns.spt /usr/share/selinux/devel/include/support/misc_macros.spt /usr/share/selinux/devel/include/support/all_perms.spt /usr/share/selinux/devel/include/support/mls_mcs_macros.spt /usr/share/selinux/devel/include/support/loadable_module.spt tmp/all_interfaces.conf expander.te > expander.tmp 2> /dev/null
     if [ "x$GENTEMODULE" = "x1" ]; then
        #    sed '/^#.*$/d;/^\s*$/d;/^\s*class .*/d;/^\s*category .*/d;s/^\s*//' expander.tmp
