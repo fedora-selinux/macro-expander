@@ -19,14 +19,6 @@ Generated output is in CIL representation or in policy source (.te) format.
     $ cd macro-expander
 
     $ ./macro-expander.sh "apache_read_log(mysqld_t)"
-    (allow mysqld_t httpd_log_t (dir (getattr search open)))
-    (allow mysqld_t httpd_log_t (dir (ioctl read getattr lock search open)))
-    (allow mysqld_t httpd_log_t (file (ioctl read getattr lock open)))
-    (allow mysqld_t httpd_log_t (lnk_file (read getattr)))
-    (allow mysqld_t var_log_t (dir (getattr search open)))
-    (allow mysqld_t var_t (dir (getattr search open)))
-
-    $ ./macro-expander.sh -t "apache_read_log(mysqld_t)"
     allow mysqld_t var_t:dir { getattr search open };
     allow mysqld_t var_log_t:dir { getattr search open };
     allow mysqld_t httpd_log_t:dir { getattr search open read lock ioctl };
@@ -34,3 +26,11 @@ Generated output is in CIL representation or in policy source (.te) format.
     allow mysqld_t httpd_log_t:file { open { getattr read ioctl lock } };
     allow mysqld_t httpd_log_t:dir { getattr search open };
     allow mysqld_t httpd_log_t:lnk_file { getattr read };
+
+    $ ./macro-expander.sh -c "apache_read_log(mysqld_t)"
+    (allow mysqld_t httpd_log_t (dir (getattr search open)))
+    (allow mysqld_t httpd_log_t (dir (ioctl read getattr lock search open)))
+    (allow mysqld_t httpd_log_t (file (ioctl read getattr lock open)))
+    (allow mysqld_t httpd_log_t (lnk_file (read getattr)))
+    (allow mysqld_t var_log_t (dir (getattr search open)))
+    (allow mysqld_t var_t (dir (getattr search open)))
